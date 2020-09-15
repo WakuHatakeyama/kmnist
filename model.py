@@ -29,10 +29,18 @@ class ConvNet(nn.Module):
         x = self.dropout2(self.pool(F.relu(self.conv5(x))))
         x = x.view(x.size(0), -1)
         x = self.dropout3(F.relu(self.fc1(x)))
-        x = torch.sigmoid(self.fc2(x))
+        x = self.fc2(x)
         return x
 
 def weight_init(m):
     if isinstance(m, nn.Conv2d) or isinstance(m, nn.Linear):
         nn.init.xavier_uniform_(m.weight, gain=nn.init.calculate_gain('relu'))
         nn.init.zeros_(m.bias)
+
+
+if __name__ == "__main__":
+    from torchsummary import summary
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    model = ConvNet()
+    model = model.to(device)
+    summary(model, (1, 28, 28))

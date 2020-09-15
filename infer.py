@@ -37,6 +37,7 @@ if __name__ == '__main__':
     model.load_state_dict(torch.load(config['pre_trained_model']))
     model.to(device)
 
+    model.eval()
     with torch.no_grad():
         correct = 0
         total = 0
