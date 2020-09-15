@@ -9,7 +9,7 @@ from torch.utils.data import DataLoader
 import torch.optim as optim
 import torchvision.transforms as transforms
 
-from model import ConvNet, weight_init
+from model import ConvNet, weight_init, resnet18
 from data import KMNIST
 from train import train
 
@@ -40,8 +40,9 @@ if __name__ == '__main__':
     val_set = KMNIST(X_val, y_val, transform=transform)
     val_loader = DataLoader(val_set, batch_size=BATCH_SIZE, shuffle=True, num_workers=2)
 
-    model = ConvNet()
-    model.apply(weight_init)
+    model = resnet18()
+    # model = ConvNet()
+    # model.apply(weight_init)
 
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.parameters(), lr=0.0005)

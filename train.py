@@ -28,7 +28,7 @@ def train(train_loader, val_loader, model, criterion, optimizer, n_epochs=50, sa
         val_loss = 0
         model.eval()
         with torch.no_grad():
-            for i, (images, labels) in enumerate(val_loader):
+            for (images, labels) in val_loader:
                 images = images.to(device)
                 labels = labels.to(device)
                 outputs = model(images)
@@ -37,7 +37,7 @@ def train(train_loader, val_loader, model, criterion, optimizer, n_epochs=50, sa
                 _, predicted = torch.max(outputs.data, 1)
                 total += labels.size(0)
                 correct += (predicted == labels).sum().item()
-        print(f'Val accuracy: {round(100*float(correct/total), 2)} %, loss: {round(val_loss/i, 3)}')
+        print(f'Val accuracy: {round(100*float(correct/total), 2)} %, loss: {round(val_loss/len(val_loader), 3)}')
 
     if save_weight:
         os.makedirs('output/', exist_ok=True)

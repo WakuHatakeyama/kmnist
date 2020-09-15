@@ -10,7 +10,7 @@ import torch.optim as optim
 import torchvision
 import torchvision.transforms as transforms
 
-from model import ConvNet, weight_init
+from model import ConvNet, weight_init, resnet18
 from data import KMNIST
 from train import train
 
@@ -33,7 +33,8 @@ if __name__ == '__main__':
     test_set = KMNIST(test_images, test_labels, transform=transform)
     test_loader = DataLoader(test_set, batch_size=BATCH_SIZE, shuffle=False, num_workers=2)
 
-    model = ConvNet()
+    # model = ConvNet()
+    model = resnet18()
     model.load_state_dict(torch.load(config['pre_trained_model']))
     model.to(device)
 
