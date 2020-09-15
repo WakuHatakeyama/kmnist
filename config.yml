@@ -1,0 +1,14 @@
+data:
+    train:
+        image: './data/kmnist-train-imgs.npz'
+        label: './data/kmnist-train-labels.npz'
+    test:
+        image: './data/kmnist-test-imgs.npz'
+        label: './data/kmnist-test-labels.npz'
+    test_size: 0.1
+    random_state: 2020
+
+pre_trained_model: 'output/96.3.pth'
+
+num_epoch: 25
+batch_size: 128
